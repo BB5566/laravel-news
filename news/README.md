@@ -37,6 +37,7 @@ php artisan serve
 ### 4. 主要檔案說明與註解
 
 #### `routes/web.php` 路由設定
+
 ```php
 // 首頁顯示新聞列表
 Route::get('/', [NewsController::class, 'index']);
@@ -46,6 +47,7 @@ Route::resource('news', NewsController::class);
 ```
 
 #### `resources/views/news/index.blade.php` 新聞列表頁
+
 ```blade
 {{-- 頁面樣式設定 --}}
 {{-- 頁首 --}}
@@ -62,6 +64,7 @@ Route::resource('news', NewsController::class);
 ```
 
 #### `resources/views/news/create.blade.php` 新增新聞頁
+
 ```blade
 {{-- 頁首 --}}
 {{-- 新增新聞表單 --}}
@@ -71,6 +74,7 @@ Route::resource('news', NewsController::class);
 ```
 
 #### `resources/views/news/edit.blade.php` 編輯新聞頁
+
 ```blade
 {{-- 頁首 --}}
 {{-- 編輯新聞表單 --}}
@@ -81,6 +85,7 @@ Route::resource('news', NewsController::class);
 ```
 
 #### `resources/views/news/show.blade.php` 單篇新聞頁
+
 ```blade
 {{-- 頁首 --}}
 {{-- 單篇新聞內容 --}}
@@ -92,16 +97,19 @@ Route::resource('news', NewsController::class);
 ```
 
 #### `app/Http/Controllers/NewsController.php` 控制器
+
 每個方法都已加中文註解，說明用途：
-- create：顯示新增表單
-- store：儲存新聞
-- index：顯示列表
-- show：顯示單篇
-- edit：顯示編輯表單
-- update：更新新聞
-- destroy：刪除新聞
+
+-   create：顯示新增表單
+-   store：儲存新聞
+-   index：顯示列表
+-   show：顯示單篇
+-   edit：顯示編輯表單
+-   update：更新新聞
+-   destroy：刪除新聞
 
 #### `app/Models/News.php` 資料模型
+
 ```php
 protected $fillable = ['title', 'content', 'author']; // 批量賦值安全設定
 ```
