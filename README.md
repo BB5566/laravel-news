@@ -18,24 +18,24 @@
 ## 安裝與啟動步驟
 
 1. 安裝套件：
-	```bash
-	composer install
-	```
+   ```bash
+   composer install
+   ```
 2. 建立資料表：
-	```bash
-	php artisan migrate
-	```
+   ```bash
+   php artisan migrate
+   ```
 3. 啟動伺服器：
-	```bash
-	php artisan serve
-	```
+   ```bash
+   php artisan serve
+   ```
 4. 預設網址：
-	- 首頁/新聞列表：`http://localhost:8000/`
-	- 新增新聞：`http://localhost:8000/news/create`
-	- 編輯新聞：`http://localhost:8000/news/{id}/edit`
-	- 單篇新聞：`http://localhost:8000/news/{id}`
-	- API 所有新聞：`http://localhost:8000/api/news`
-	- API 單篇新聞：`http://localhost:8000/api/news/1`
+   - 首頁/新聞列表：`http://localhost:8000/`
+   - 新增新聞：`http://localhost:8000/news/create`
+   - 編輯新聞：`http://localhost:8000/news/{id}/edit`
+   - 單篇新聞：`http://localhost:8000/news/{id}`
+   - API 所有新聞：`http://localhost:8000/api/news`
+   - API 單篇新聞：`http://localhost:8000/api/news/1`
 
 ---
 
@@ -51,7 +51,9 @@
 ## 主要檔案與註解
 
 ### 路由設定
+
 `routes/web.php`：網頁功能路由
+
 ```php
 // 首頁顯示新聞列表
 Route::get('/', [NewsController::class, 'index']);
@@ -60,6 +62,7 @@ Route::resource('news', NewsController::class);
 ```
 
 `routes/api.php`：API 路由
+
 ```php
 use App\Models\News;
 Route::get('news', function() {
@@ -71,7 +74,9 @@ Route::get('news/{news}', function(News $news) {
 ```
 
 ### Controller 註解
+
 `app/Http/Controllers/NewsController.php`
+
 - create：顯示新增表單
 - store：儲存新聞
 - index：顯示列表
@@ -81,13 +86,17 @@ Route::get('news/{news}', function(News $news) {
 - destroy：刪除新聞
 
 ### Model 設定
+
 `app/Models/News.php`
+
 ```php
 protected $fillable = ['title', 'content', 'author']; // 批量賦值安全設定
 ```
 
 ### Blade 頁面註解
+
 `resources/views/news/*.blade.php`
+
 - 頁首、頁尾
 - 新增/編輯/顯示/列表表單
 - @csrf、@method('PUT')
@@ -101,16 +110,16 @@ protected $fillable = ['title', 'content', 'author']; // 批量賦值安全設�
 1. API 路由請加在 `routes/api.php`，不要加在 `web.php`。
 2. API 路由預設無 session/csrf，適合前端或 APP 取用。
 3. 若遇到 `/api/news` 404，請檢查：
-	- `bootstrap/app.php` 有載入 api 路由：
-	  ```php
-	  ->withRouting(
-			web: __DIR__.'/../routes/web.php',
-			api: __DIR__.'/../routes/api.php',
-			...
-	  )
-	  ```
-	- 專案根目錄啟動 `php artisan serve`
-	- API 路由語法正確
+   - `bootstrap/app.php` 有載入 api 路由：
+     ```php
+     ->withRouting(
+     	web: __DIR__.'/../routes/web.php',
+     	api: __DIR__.'/../routes/api.php',
+     	...
+     )
+     ```
+   - 專案根目錄啟動 `php artisan serve`
+   - API 路由語法正確
 
 ---
 
@@ -209,21 +218,19 @@ Route::resource('news', NewsController::class);
 
 每個方法都已加中文註解，說明用途：
 
--   create：顯示新增表單
--   store：儲存新聞
--   index：顯示列表
--   show：顯示單篇
--   edit：顯示編輯表單
--   update：更新新聞
--   destroy：刪除新聞
-
+- create：顯示新增表單
+- store：儲存新聞
+- index：顯示列表
+- show：顯示單篇
+- edit：顯示編輯表單
+- update：更新新聞
+- destroy：刪除新聞
 
 #### `app/Models/News.php` 資料模型
 
 ```php
 protected $fillable = ['title', 'content', 'author']; // 批量賦值安全設定
 ```
-
 
 #### API 取用 JSON 資料
 
@@ -244,6 +251,7 @@ Route::get('news/{news}', function(News $news) {
 ```
 
 步驟：
+
 1. 編輯 `routes/api.php`，貼上上方程式碼。
 2. 確認已啟動 Laravel 伺服器（`php artisan serve`）。
 3. 在瀏覽器或前端程式使用：
@@ -251,22 +259,23 @@ Route::get('news/{news}', function(News $news) {
    - `http://localhost:8000/api/news/1` 取得單篇新聞 JSON
 
 注意：
+
 - API 路由請加在 `api.php`，不要加在 `web.php`。
 - API 路由預設無 session/csrf，適合前端或 APP 取用。
 
 ### 5. 常見操作
 
--   新增新聞：填寫表單送出。
--   編輯新聞：進入編輯頁面修改內容。
--   刪除新聞：點擊刪除按鈕。
--   返回列表：各頁面均有返回列表按鈕。
+- 新增新聞：填寫表單送出。
+- 編輯新聞：進入編輯頁面修改內容。
+- 刪除新聞：點擊刪除按鈕。
+- 返回列表：各頁面均有返回列表按鈕。
 
 ### 6. 學習重點
 
--   路由與 RESTful 資源控制器
--   Blade 模板語法與註解
--   表單送出與 CSRF 防護
--   資料庫 migration 與 Model 設定
+- 路由與 RESTful 資源控制器
+- Blade 模板語法與註解
+- 表單送出與 CSRF 防護
+- 資料庫 migration 與 Model 設定
 
 ---
 

@@ -7,15 +7,15 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 
 class RouteServiceProvider extends ServiceProvider
 {
-    public function boot(): void
-    {
-        $this->routes(function () {
-            Route::middleware('web')
-                ->group(base_path('routes/web.php'));
+  public function boot(): void
+  {
+    $this->routes(function () {
+      Route::middleware('web')
+        ->group(base_path('routes/web.php'));
 
-            Route::prefix('api')
-                ->middleware('api')
-                ->group(base_path('routes/api.php'));
-        });
-    }
+      Route::prefix('api')
+        ->middleware('api')
+        ->group(base_path('routes/api.php'));
+    });
+  }
 }
